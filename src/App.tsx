@@ -6,7 +6,9 @@ import Dashboard from "@/pages/Dashboard";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import Settings from "@/pages/Settings";
 import NotFound from "@/pages/NotFound";
-import RecyclingItems from "@/pages/RecyclingItems";
+import RecyclableItems from "@/pages/RecyclableItems";
+import CreateRecyclableItem from "@/pages/CreateRecyclableItem";
+
 import RecyclingBins from "@/pages/RecyclingBins";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BackendStatusProvider } from "@/context/BackendStatusContext";
@@ -29,7 +31,12 @@ function App() {
               <Route element={<DashboardLayout />}>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/recycling-items" element={<RecyclingItems />} />
+                <Route path="/recyclable-items" element={<RecyclableItems />} />
+                <Route
+                  path="/recyclable-items/create"
+                  element={<CreateRecyclableItem />}
+                />
+
                 <Route path="/recycling-bins" element={<RecyclingBins />} />
               </Route>
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -68,7 +69,10 @@ export function CreateRecyclingBinModal({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Create a Recycling Bin</Button>
+        <Button>
+          <Plus className="mr-2 h-4 w-4" />
+          Create a Recycling Bin
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

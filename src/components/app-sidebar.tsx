@@ -42,8 +42,8 @@ const items = [
     icon: Home,
   },
   {
-    title: "Recycling Items",
-    url: "/recycling-items",
+    title: "Recyclable Items",
+    url: "/recyclable-items",
     icon: BottleWine,
   },
   {

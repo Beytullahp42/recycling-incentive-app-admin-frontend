@@ -37,3 +37,20 @@ export async function getCurrentUser(): Promise<User | null> {
   let user = response.data;
   return user ? new User(user) : null;
 }
+
+export async function updatePassword(
+  currentPassword: string,
+  newPassword: string,
+  newPasswordConfirmation: string
+): Promise<void> {
+  await api.put("/api/password", {
+    current_password: currentPassword,
+    new_password: newPassword,
+    new_password_confirmation: newPasswordConfirmation,
+  });
+}
+
+export async function updateEmail(email: string): Promise<User> {
+  const response = await api.put("/api/email", { email });
+  return new User(response.data.user);
+}
