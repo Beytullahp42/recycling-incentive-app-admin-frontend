@@ -81,7 +81,10 @@ export function RecyclingBinQRModal({ bin }: RecyclingBinQRModalProps) {
                   id="size"
                   type="number"
                   value={size}
-                  onChange={(e) => setSize(Number(e.target.value))}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    if (val >= 0) setSize(val);
+                  }}
                 />
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -90,7 +93,10 @@ export function RecyclingBinQRModal({ bin }: RecyclingBinQRModalProps) {
                   id="marginSize"
                   type="number"
                   value={marginSize}
-                  onChange={(e) => setMarginSize(Number(e.target.value))}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    if (val >= 0) setMarginSize(val);
+                  }}
                 />
               </div>
             </div>

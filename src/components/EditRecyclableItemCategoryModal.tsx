@@ -22,7 +22,8 @@ const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   value: z
     .string()
-    .refine((val) => !isNaN(parseFloat(val)), "Value must be a number"),
+    .refine((val) => !isNaN(parseFloat(val)), "Value must be a number")
+    .refine((val) => parseFloat(val) >= 0, "Value must be 0 or greater"),
 });
 
 interface EditRecyclableItemCategoryModalProps {

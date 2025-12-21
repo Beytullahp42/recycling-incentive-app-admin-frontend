@@ -19,9 +19,15 @@ const formSchema = z.object({
   manual_value: z
     .string()
     .optional()
-    .refine((val) => !val || !isNaN(parseFloat(val)), "Value must be a number"),
+    .refine((val) => !val || !isNaN(parseFloat(val)), "Value must be a number")
+    .refine(
+      (val) => !val || parseFloat(val) >= 0,
+      "Value must be 0 or greater"
+    ),
   barcode: z.string().min(1, "Barcode is required"),
-  category_id: z.string().min(1, "Category is required"),
+  category_id: z
+    .string({ message: "Category required" })
+    .min(1, "Category required"),
 });
 
 const CreateRecyclableItem = () => {
@@ -153,6 +159,7 @@ const CreateRecyclableItem = () => {
               <CategorySelect
                 value={categoryId}
                 onChange={(val) => setValue("category_id", val)}
+                error={errors.category_id?.message}
               />
             </div>
 
