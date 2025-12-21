@@ -8,6 +8,7 @@ import Settings from "@/pages/Settings";
 import NotFound from "@/pages/NotFound";
 import RecyclableItems from "@/pages/RecyclableItems";
 import CreateRecyclableItem from "@/pages/CreateRecyclableItem";
+import RecyclableItemCategories from "@/pages/RecyclableItemCategories";
 
 import RecyclingBins from "@/pages/RecyclingBins";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -35,6 +36,11 @@ function App() {
                 <Route
                   path="/recyclable-items/create"
                   element={<CreateRecyclableItem />}
+                />
+
+                <Route
+                  path="/recyclable-item-categories"
+                  element={<RecyclableItemCategories />}
                 />
 
                 <Route path="/recycling-bins" element={<RecyclingBins />} />

@@ -4,7 +4,8 @@ export class RecyclableItem {
   id: number;
   name: string;
   description: string;
-  value: number;
+  manual_value: number | null;
+  current_value: number;
   barcode: string;
   category_id: number | null;
   category?: RecyclableItemCategory | null;
@@ -16,7 +17,8 @@ export class RecyclableItem {
     id: number;
     name: string;
     description: string;
-    value: number;
+    manual_value: number | null;
+    current_value: number;
     barcode: string;
     category_id: number | null;
     category?: RecyclableItemCategory | null;
@@ -27,7 +29,8 @@ export class RecyclableItem {
     this.id = data.id;
     this.name = data.name;
     this.description = data.description;
-    this.value = data.value;
+    this.manual_value = data.manual_value;
+    this.current_value = data.current_value;
     this.barcode = data.barcode;
     this.category_id = data.category_id;
     this.category = data.category

@@ -5,6 +5,7 @@ import {
   Settings,
   Trash2,
   BottleWine,
+  LayoutGrid,
 } from "lucide-react";
 
 import {
@@ -40,6 +41,11 @@ const items = [
     title: "Home",
     url: "/",
     icon: Home,
+  },
+  {
+    title: "Recyclable Item Categories",
+    url: "/recyclable-item-categories",
+    icon: LayoutGrid,
   },
   {
     title: "Recyclable Items",

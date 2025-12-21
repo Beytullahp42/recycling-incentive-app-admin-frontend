@@ -17,15 +17,17 @@ import { updateRecyclableItem } from "@/services/recyclable-items-endpoints";
 import { RecyclableItem } from "@/models/RecyclableItem";
 import type { RecyclableItemDTO } from "@/dtos/RecyclableItemDTO";
 import { Pencil } from "lucide-react";
+import { CategorySelect } from "@/components/CategorySelect";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().optional(),
-  value: z
+  manual_value: z
     .string()
     .optional()
     .refine((val) => !val || !isNaN(parseFloat(val)), "Value must be a number"),
   barcode: z.string().min(1, "Barcode is required"),
+  category_id: z.string().min(1, "Category is required"),
 });
 
 interface EditRecyclableItemModalProps {
@@ -42,6 +44,8 @@ export function EditRecyclableItemModal({
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
     reset,
     setError,
@@ -50,18 +54,22 @@ export function EditRecyclableItemModal({
     defaultValues: {
       name: item.name,
       description: item.description,
-      value: item.value?.toString() ?? "",
+      manual_value: item.manual_value?.toString() ?? "",
       barcode: item.barcode,
+      category_id: item.category_id?.toString(),
     },
   });
+
+  const categoryId = watch("category_id");
 
   // Reset form when item changes
   useEffect(() => {
     reset({
       name: item.name,
       description: item.description,
-      value: item.value?.toString() ?? "",
+      manual_value: item.manual_value?.toString() ?? "",
       barcode: item.barcode,
+      category_id: item.category_id?.toString(),
     });
   }, [item, reset]);
 
@@ -70,8 +78,11 @@ export function EditRecyclableItemModal({
     const dto: Partial<RecyclableItemDTO> = {
       name: values.name,
       description: values.description || "",
-      value: values.value ? parseFloat(values.value) : null,
+      manual_value: values.manual_value
+        ? parseFloat(values.manual_value)
+        : null,
       barcode: values.barcode,
+      category_id: values.category_id ? parseInt(values.category_id) : null,
     };
 
     try {
@@ -147,21 +158,31 @@ export function EditRecyclableItemModal({
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="edit-value" className="text-right">
-              Value
+            <Label htmlFor="edit-manual-value" className="text-right">
+              Manual Value
             </Label>
             <div className="col-span-3">
               <Input
-                id="edit-value"
+                id="edit-manual-value"
                 type="number"
-                {...register("value")}
+                {...register("manual_value")}
                 className="col-span-3"
+                placeholder="Leave empty to use category value"
               />
-              {errors.value && (
+              {errors.manual_value && (
                 <span className="text-red-500 text-sm">
-                  {errors.value.message}
+                  {errors.manual_value.message}
                 </span>
               )}
+            </div>
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label className="text-right">Category</Label>
+            <div className="col-span-3">
+              <CategorySelect
+                value={categoryId}
+                onChange={(val) => setValue("category_id", val)}
+              />
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">

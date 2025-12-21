@@ -11,15 +11,17 @@ import { createRecyclableItem } from "@/services/recyclable-items-endpoints";
 import type { RecyclableItemDTO } from "@/dtos/RecyclableItemDTO";
 import { useNavigate } from "react-router";
 import { ArrowLeft } from "lucide-react";
+import { CategorySelect } from "@/components/CategorySelect";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().optional(),
-  value: z
+  manual_value: z
     .string()
     .optional()
     .refine((val) => !val || !isNaN(parseFloat(val)), "Value must be a number"),
   barcode: z.string().min(1, "Barcode is required"),
+  category_id: z.string().min(1, "Category is required"),
 });
 
 const CreateRecyclableItem = () => {
@@ -29,19 +31,26 @@ const CreateRecyclableItem = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
     setError,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
+  const categoryId = watch("category_id");
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
     const dto: RecyclableItemDTO = {
       name: values.name,
       description: values.description || "",
-      value: values.value ? parseFloat(values.value) : undefined,
+      manual_value: values.manual_value
+        ? parseFloat(values.manual_value)
+        : undefined,
       barcode: values.barcode,
+      category_id: values.category_id ? parseInt(values.category_id) : null,
     };
 
     try {
@@ -111,16 +120,16 @@ const CreateRecyclableItem = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="value">Value</Label>
+              <Label htmlFor="manual_value">Manual Value</Label>
               <Input
-                id="value"
+                id="manual_value"
                 type="number"
-                {...register("value")}
-                placeholder="Default: 5"
+                {...register("manual_value")}
+                placeholder="Overwrites category value"
               />
-              {errors.value && (
+              {errors.manual_value && (
                 <span className="text-red-500 text-sm">
-                  {errors.value.message}
+                  {errors.manual_value.message}
                 </span>
               )}
             </div>
@@ -137,6 +146,14 @@ const CreateRecyclableItem = () => {
                   {errors.barcode.message}
                 </span>
               )}
+            </div>
+
+            <div className="space-y-2">
+              <Label>Category</Label>
+              <CategorySelect
+                value={categoryId}
+                onChange={(val) => setValue("category_id", val)}
+              />
             </div>
 
             <div className="flex justify-end pt-4">

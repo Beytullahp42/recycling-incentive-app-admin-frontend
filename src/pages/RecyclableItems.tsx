@@ -110,7 +110,13 @@ const RecyclableItems = () => {
                   <TableCell className="font-medium">{item.name}</TableCell>
                   <TableCell>{item.description}</TableCell>
                   <TableCell>{item.category?.name || "-"}</TableCell>
-                  <TableCell className="text-center">{item.value}</TableCell>
+                  <TableCell
+                    className={`text-center ${
+                      item.manual_value !== null ? "text-primary font-bold" : ""
+                    }`}
+                  >
+                    {item.current_value}
+                  </TableCell>
                   <TableCell>
                     <div className="flex flex-col items-center justify-center">
                       <Barcode
