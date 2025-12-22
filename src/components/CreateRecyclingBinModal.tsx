@@ -70,8 +70,8 @@ export function CreateRecyclingBinModal({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create a Recycling Bin
+          <Plus className="h-4 w-4 md:mr-2 md:-ml-1" />
+          <span className="hidden md:inline">Create a Recycling Bin</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

@@ -70,8 +70,8 @@ const RecyclableItems = () => {
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Recyclable Items</h1>
         <Button onClick={() => navigate("/recyclable-items/create")}>
-          <Plus className="mr-2 h-4 w-4" />
-          Create New Item
+          <Plus className="h-4 w-4 md:mr-2 md:-ml-1" />
+          <span className="hidden md:inline">Create New Item</span>
         </Button>
       </div>
 

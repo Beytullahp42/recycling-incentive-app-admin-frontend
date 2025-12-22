@@ -67,8 +67,8 @@ export function CreateRecyclableItemCategoryModal({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Category
+          <Plus className="h-4 w-4 md:mr-2 md:-ml-1" />
+          <span className="hidden md:inline">Create Category</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

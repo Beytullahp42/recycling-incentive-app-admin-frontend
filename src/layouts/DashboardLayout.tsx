@@ -1,4 +1,4 @@
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Navigate, Outlet, useLocation } from "react-router";
 import { useEffect } from "react";
@@ -28,7 +28,8 @@ export default function DashboardLayout() {
     <SidebarProvider>
       <AppSidebar />
       <main className="w-full">
-        <div className="p-4">
+        <SidebarTrigger className="md:hidden" />
+        <div className="px-4">
           <Outlet />
         </div>
       </main>
