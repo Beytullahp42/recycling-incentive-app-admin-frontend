@@ -11,6 +11,8 @@ import CreateRecyclableItem from "@/pages/CreateRecyclableItem";
 import RecyclableItemCategories from "@/pages/RecyclableItemCategories";
 
 import RecyclingBins from "@/pages/RecyclingBins";
+import RecyclingSessions from "@/pages/RecyclingSessions";
+import RecyclingSessionDetail from "@/pages/RecyclingSessionDetail";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BackendStatusProvider } from "@/context/BackendStatusContext";
 import { AuthProvider } from "@/context/AuthContext";
@@ -44,6 +46,14 @@ function App() {
                 />
 
                 <Route path="/recycling-bins" element={<RecyclingBins />} />
+                <Route
+                  path="/recycling-sessions"
+                  element={<RecyclingSessions />}
+                />
+                <Route
+                  path="/recycling-sessions/:id"
+                  element={<RecyclingSessionDetail />}
+                />
               </Route>
 
               {/* Fallback route */}
