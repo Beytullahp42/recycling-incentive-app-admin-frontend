@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Recycling Incentive App - Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the administrative control panel for the **Recycling Incentive App**, developed as a **Tubitak 2209-A** research project.
 
-Currently, two official plugins are available:
+The dashboard allows administrators to manage the entire recycling ecosystem, including verifying flagged transactions, managing recycling bins, and configuring recyclable items.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Session Verification:** detailed view to audit "Flagged" recycling sessions. Admins can accept or reject sessions based on the uploaded proof photo.
+- **Resource Management:** Full CRUD capabilities for:
+  - 🚮 **Recycling Bins:** Generate and print QR codes for new bins.
+  - ♻️ **Recyclable Items:** Configure point values and generate barcodes for items.
+  - 📂 **Categories:** Organize items into categories.
+- **QR & Barcode Generation:** Built-in tools to generate necessary printables (`qrcode.react`, `react-barcode`).
+- **User Management:** View registered users and their balances.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Used Technologies
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React 19**
+- **Vite**
+- **TypeScript**
+- **Shadcn UI** (Radix UI + Tailwind)
+- `react-hook-form` + `zod` for robust form validation
+- `axios` for API communication
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🔗 Links & Access
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 📦 **Backend Repository:** https://github.com/Beytullahp42/recycling-incentive-app-backend
+- 📦 **Mobile App Repository:** https://github.com/Beytullahp42/recycling-incentive-app-expo
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- 🌐 **Hosted Admin Dashboard:** https://ria-admin.beytullahp.com
+- 🔗 **Hosted Backend API:** https://ria-backend.beytullahp.com
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 📸 Screenshots
+
+<img src="screenshots/1.png" width="800">
+<br>
+<img src="screenshots/2.png" width="800">
+<br>
+<img src="screenshots/3.png" width="800">
+<br>
+<img src="screenshots/4.png" width="800">
+<br>
+<img src="screenshots/5.png" width="800">
