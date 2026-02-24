@@ -7,6 +7,7 @@ import {
   BottleWine,
   LayoutGrid,
   History,
+  Users,
 } from "lucide-react";
 
 import {
@@ -62,6 +63,11 @@ const items = [
     title: "Recycling Sessions",
     url: "/recycling-sessions",
     icon: History,
+  },
+  {
+    title: "Profiles",
+    url: "/profiles",
+    icon: Users,
   },
   {
     title: "Settings",
