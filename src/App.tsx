@@ -14,6 +14,7 @@ import RecyclingBins from "@/pages/RecyclingBins";
 import RecyclingSessions from "@/pages/RecyclingSessions";
 import RecyclingSessionDetail from "@/pages/RecyclingSessionDetail";
 import Profiles from "@/pages/Profiles";
+import ProfileDetail from "@/pages/ProfileDetail";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BackendStatusProvider } from "@/context/BackendStatusContext";
 import { AuthProvider } from "@/context/AuthContext";
@@ -56,6 +57,10 @@ function App() {
                   element={<RecyclingSessionDetail />}
                 />
                 <Route path="/profiles" element={<Profiles />} />
+                <Route
+                  path="/profiles/:username"
+                  element={<ProfileDetail />}
+                />
               </Route>
 
               {/* Fallback route */}

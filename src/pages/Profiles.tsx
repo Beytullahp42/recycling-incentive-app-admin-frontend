@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import {
   Pagination,
   PaginationContent,
@@ -15,9 +16,11 @@ import type { PaginatedResponse } from "@/models/PaginatedResponse";
 import {
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   User,
@@ -213,6 +216,18 @@ export default function Profiles() {
                   </div>
                 </div>
               </CardContent>
+              <CardFooter className="bg-muted/10">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full text-sm h-9 bg-background"
+                  asChild
+                >
+                  <Link to={`/profiles/${profile.username}`}>
+                    View Details
+                  </Link>
+                </Button>
+              </CardFooter>
             </Card>
           ))}
         </div>
