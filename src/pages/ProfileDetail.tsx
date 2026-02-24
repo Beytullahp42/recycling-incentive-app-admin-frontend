@@ -13,6 +13,7 @@ import {
   FileText,
   Clock,
   Save,
+  Lock,
 } from "lucide-react";
 
 import {
@@ -56,6 +57,7 @@ interface EditableFields {
   points: number;
   email: string;
   role: "user" | "admin";
+  password: string;
 }
 
 export default function ProfileDetail() {
@@ -76,6 +78,7 @@ export default function ProfileDetail() {
     points: 0,
     email: "",
     role: "user",
+    password: "",
   });
 
   // Original values to diff against
@@ -88,6 +91,7 @@ export default function ProfileDetail() {
     points: 0,
     email: "",
     role: "user",
+    password: "",
   });
 
   useEffect(() => {
@@ -106,10 +110,11 @@ export default function ProfileDetail() {
         last_name: response.profile.last_name,
         username: response.profile.username,
         bio: response.profile.bio || "",
-        birth_date: response.profile.birth_date,
+        birth_date: response.profile.birth_date.split("T")[0],
         points: response.profile.points,
         email: response.user.email,
         role: response.user.role as "user" | "admin",
+        password: "",
       };
       setForm(initial);
       setOriginal(initial);
@@ -131,17 +136,29 @@ export default function ProfileDetail() {
       points: "Points",
       email: "Email",
       role: "Role",
+      password: "Password",
     };
 
     (Object.keys(labels) as (keyof EditableFields)[]).forEach((key) => {
       const origVal = String(original[key]);
       const newVal = String(form[key]);
       if (origVal !== newVal) {
-        changes.push({
-          label: labels[key],
-          from: origVal || "(empty)",
-          to: newVal || "(empty)",
-        });
+        // Don't show password values in the diff
+        if (key === "password") {
+          if (newVal) {
+            changes.push({
+              label: labels[key],
+              from: "(unchanged)",
+              to: "••••••••",
+            });
+          }
+        } else {
+          changes.push({
+            label: labels[key],
+            from: origVal || "(empty)",
+            to: newVal || "(empty)",
+          });
+        }
       }
     });
 
@@ -190,6 +207,9 @@ export default function ProfileDetail() {
             break;
           case "Role":
             dto.role = form.role;
+            break;
+          case "Password":
+            dto.password = form.password;
             break;
         }
       });
@@ -487,6 +507,25 @@ export default function ProfileDetail() {
                 value={form.email}
                 onChange={(e) => updateField("email", e.target.value)}
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="password" className="flex items-center">
+                <Lock className="w-3.5 h-3.5 mr-1" />
+                New Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                value={form.password}
+                onChange={(e) => updateField("password", e.target.value)}
+                placeholder="Leave blank to keep current password"
+              />
+              {form.password && form.password.length < 8 && (
+                <p className="text-xs text-red-500">
+                  Password must be at least 8 characters
+                </p>
+              )}
             </div>
 
             <div className="flex items-center justify-between border rounded-lg p-4">
