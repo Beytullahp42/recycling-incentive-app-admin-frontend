@@ -6,6 +6,8 @@ export async function getCsrfCookie(): Promise<void> {
 }
 
 export async function login(email: string, password: string): Promise<boolean> {
+  await getCsrfCookie();
+
   const response = await api.post("/api/admin/login", { email, password });
 
   if (response.status === 200 || response.status === 204) {
