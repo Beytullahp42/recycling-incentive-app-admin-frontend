@@ -23,6 +23,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -84,7 +92,54 @@ export default function Login() {
 
   return (
     <div className="relative min-h-screen">
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-4 right-4 flex items-center gap-2">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              aria-label="Show demo admin credentials"
+              title="Demo credentials"
+            >
+              <span aria-hidden="true" className="text-base font-semibold">
+                ?
+              </span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Demo admin credentials</DialogTitle>
+              <DialogDescription>
+                Use these credentials reasonably for demo purposes.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4 text-sm">
+              <div className="rounded-md border bg-muted/40 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="font-medium text-muted-foreground">
+                    Email
+                  </span>
+                  <code className="rounded bg-background px-2 py-1 font-mono text-sm">
+                    admin@recycling.com
+                  </code>
+                </div>
+                <div className="mt-3 flex items-center justify-between gap-4">
+                  <span className="font-medium text-muted-foreground">
+                    Password
+                  </span>
+                  <code className="rounded bg-background px-2 py-1 font-mono text-sm">
+                    password
+                  </code>
+                </div>
+              </div>
+              <p className="text-muted-foreground">
+                The whole app, database, and persistent volumes are reset every
+                24 hours.
+              </p>
+            </div>
+          </DialogContent>
+        </Dialog>
         <ModeToggle />
       </div>
       <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-zinc-950 p-4">
